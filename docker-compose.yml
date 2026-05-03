@@ -1,0 +1,20 @@
+version: "3.8"
+
+services:
+  backend:
+    build: ./backend
+    container_name: mcp-dashboard-backend
+    ports:
+      - "8000:8000"
+    volumes:
+      - /Users/snarayanan/Documents/AI\ Security/ai_security_monitoring_tool/mcp-servers/audit.log:/app/audit.log:ro
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: mcp-dashboard-frontend
+    ports:
+      - "3001:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
